@@ -13,9 +13,7 @@ public class UC01CadastrarLivro {
 			// cenario
 			Livro umLivro = new Livro();
 			// acao
-			umLivro.setIsbn("121212");
-			umLivro.setTitulo("Engenharia de Softwar");
-			umLivro.setAutor("Pressman");
+			umLivro = ObtemLivro.comDadosValidos();
 		} catch (RuntimeException e) {
 			// verificacao
 			fail("nao deve falhar");
@@ -23,17 +21,48 @@ public class UC01CadastrarLivro {
 	}
 
 	@Test
-	public void CT01CadastrarLivroISBNBranco() {
+	public void CT02CadastrarLivroISBNBranco() {
 		try {
 			// cenario
 			Livro umLivro = new Livro();
 			// acao
-			umLivro.setIsbn("");
-			umLivro.setTitulo("Engenharia de Softwar");
-			umLivro.setAutor("Pressman");
+			umLivro = ObtemLivro.comISBNInvalido_branco();
 		} catch (RuntimeException e) {
 			// verificacao
-			assertEquals ("ISBN invaliso",e.getMessage());
+			assertEquals("ISBN invalido", e.getMessage());
 		}
+	}
+
+	@Test
+	public void CT03CadastrarLivrocomISBNInvalido_nulo() {
+		try {
+			// cenario
+			Livro umLivro = new Livro();
+			// acao
+			umLivro = ObtemLivro.comISBNInvalido_nulo();
+		} catch (RuntimeException e) {
+			// verificacao
+			assertEquals("ISBN invalido", e.getMessage());
+		}
+	}
+
+	@Test
+	public void CT04CadastrarLivroComDadosValidos() {
+		// cenario
+		Livro umLivro = new Livro();
+		// acao
+		umLivro = ObtemLivro.comDadosValidos();
+
+		assertEquals("121212", umLivro.getIsbn());
+	}
+
+	@Test
+	public void CT05CadastrarLivroComDadosValidos() {
+		// cenario
+		Livro umLivro = new Livro();
+		// acao
+		umLivro = ObtemLivro.comDadosValidos();
+
+		assertEquals("Enmgenharia de Software", umLivro.getTitulo());
 	}
 }
